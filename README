@@ -1,0 +1,24 @@
+This is a very raw proof of concept that shows an example of streaming content to many users utilizing XMPP's pubsub and BOSH extensions.
+
+This has no architecture or finesse, I know. It's a demo.
+
+used libraries:
+Strophe.js
+xmpppy
+tweetstream
+pydns (for SRV record lookup)
+
+external requirements:
+running jabber server with bosh, pubsub and anonymous sasl enabled
+
+example jabber configuration:
+install ejabberd, start it, create a user (username, jabber host, password)
+$ ejabberdctl register pubsub_demo localhost pubsub_d3m0
+
+In ejabberd conf you'll want something akin to this:
+{host_config, "localhost", [{auth_method, [internal, anonymous]},
+                                     {allow_multiple_connections, true},
+                                     {anonymous_protocol, sasl_anon}]}.
+
+running:
+place auth info into twitter_producer.py, run it
